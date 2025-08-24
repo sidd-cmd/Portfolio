@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberMinimal Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        :root {
+            --bg-primary: #0a0a12;
+            --bg-secondary: #111122;
+            --text-primary: #e0e0ff;
+            --text-secondary: #a0a0ff;
+            --accent: #6e44ff;
+            --accent-glow: 0 0 10px #6e44ff, 0 0 20px #6e44ff66;
+            --neon-blue: #00d9ff;
+            --neon-pink: #ff2a6d;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Header & Navigation */
+        header {
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(160, 160, 255, 0.1);
+            position: relative;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--accent);
+            text-shadow: var(--accent-glow);
+            margin-right: 0.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 6rem 0 4rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--text-primary), var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.4rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--text-secondary);
+        }
+        
+        .hero-cta {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .hero-cta:hover {
+            box-shadow: var(--accent-glow);
+        }
+        
+        /* Section Styling */
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+        
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .skill {
+            padding: 0.5rem 1.2rem;
+            background: rgba(110, 68, 255, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: 30px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+        
+        .skill:hover {
+            background: rgba(110, 68, 255, 0.2);
+            box-shadow: var(--accent-glow);
+            transform: translateY(-2px);
+        }
+        
+        /* Portfolio Section */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .portfolio-item {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(160, 160, 255, 0.05);
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent);
+        }
+        
+        .portfolio-img {
+            height: 200px;
+            background: linear-gradient(45deg, #1a1a2a, #16213e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 3rem;
+        }
+        
+        .portfolio-info {
+            padding: 1.5rem;
+        }
+        
+        .portfolio-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .portfolio-info p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(110, 68, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+        
+        .contact-text {
+            color: var(--text-secondary);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(160, 160, 255, 0.1);
+            margin-top: 4rem;
+            color: var(--text-secondary);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-links a {
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+            text-shadow: var(--accent-glow);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Cyberpunk Elements */
+        .cyberpunk-glitch {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .cyberpunk-glitch::before,
+        .cyberpunk-glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .cyberpunk-glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 var(--neon-blue);
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+        
+        .cyberpunk-glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 var(--neon-pink);
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+        
+        @keyframes glitch-anim {
+            0% { clip: rect(42px, 9999px, 44px, 0); }
+            5% { clip: rect(12px, 9999px, 59px, 0); }
+            10% { clip: rect(48px, 9999px, 29px, 极); }
+            15% { clip: rect(42px, 9999px, 73px, 0); }
+            20% { clip: rect(63px, 9999px, 27px, 0); }
+            25% { clip: rect(34px, 9999px, 55px, 0); }
+            30% { clip: rect(86px, 9999px, 73px, 0); }
+            35% { clip: rect(20px, 9999px, 20px, 0); }
+            40% { clip: rect(26px, 9999px, 60px, 0); }
+            45% { clip: rect(25px, 9999px, 66px, 0); }
+            50% { clip: rect(57px, 9999px, 98px, 0); }
+            55% { clip: rect(5px, 9999px, 46px, 0); }
+            60% { clip: rect(82px, 9999极, 31px, 0); }
+            65% { clip: rect(54px, 9999px, 27px, 0); }
+            70% { clip: rect(28px, 9999px, 99px, 0); }
+            75% { clip: rect(45px, 9999px, 69px, 0); }
+            80% { clip: rect(23px, 9999px, 85px, 0); }
+            85% { clip: rect(54px, 9999px, 84px, 0); }
+            90% { clip: rect(45px, 9999px, 58px, 0); }
+            95% { clip: rect(66px, 9999px, 98px, 0); }
+            100% { clip: rect(34px, 9999px, 100px, 0); }
+        }
+        
+        @keyframes glitch-anim2 {
+            0% { clip: rect(65px, 9999px, 100px, 0); }
+            5% { clip: rect(52px, 9999px, 74px, 0); }
+            10% { clip: rect(79px, 9999px, 85px, 0); }
+            15% { clip: rect(75px, 9999px, 5px, 0); }
+            20% { clip: rect(67px, 9999px, 61px, 0); }
+            25% { clip: rect(14px, 9999px, 79px, 0); }
+            30% { clip: rect(1px, 9999px, 66px, 0); }
+            35% { clip: rect(86px, 9999px, 30px, 0); }
+            40% { clip: rect(23px, 9999px, 98px, 0); }
+            45% { clip: rect(85px, 9999px, 72px, 0); }
+            50% {极: rect(71px, 9999px, 75px, 0); }
+            55% { clip: rect(2px, 9999px, 48px, 0); }
+            60% { clip: rect(80px, 9999px, 87px, 0); }
+            65% { clip: rect(41px, 9999px, 60px, 0); }
+            70% { clip: rect(83px, 9999px, 73px, 0); }
+            75% { clip: rect(90px, 9999px, 78px, 0); }
+            80% { clip: rect(61px, 9999px, 66px, 0); }
+            85% { clip: rect(71px, 9999px, 35px, 0); }
+            90% { clip: rect(27px, 9999px, 93px, 0); }
+            95% { clip: rect(35px, 9999px, 90px, 0); }
+            100% { clip: rect(9px, 9999px, 60px, 0); }
+        }
+        
+        .scan-line {
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(to bottom, 
+                transparent, 
+                var(--neon-blue) 50%,
+                transparent);
+            opacity: 0.1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: scan 8s linear infinite;
+            z-index: 999;
+            pointer-events: none;
+        }
+        
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100vh; }
+        }
+    </style>
+</head>
+<body>
+    <div class="scan-line"></div>
+    
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo"><span>&gt;</span>CYBER_DEV</a>
+                <div class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#portfolio">Work</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1 class="cyberpunk-glitch" data-text="Siddharth Venkatesan">DIGITAL_CREATOR</h1>
+            <p>I enjoy minimalist digital experiences with a cyberpunk aesthetic</p>
+            <a href="#portfolio" class="hero-cta">View My Work</a>
+        </div>
+    </section>
+    
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Creating the future, one line of code at a time</h3>
+                    <p>I'm a ECE undergrade at SRMIST currently in my 2nd year.</p>
+                    <p>I am interning at CEM & am an flight systems engineer at ASRL SRM.</p>
+                    <p>I have worked with Embedded systems PCB desib and Simulation softwares to explore and creat many unique and interesting projects both personal and public</p>
+                    
+                    <div class="skills">
+                        <div class="skill">PCB Design & Debugging</div>
+                        <div class="skill">Web Development</div>
+                        <div class="skill">Embedded Systems</div>
+                        <div class="skill">Edge AI</div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div style="background: linear-gradient(45deg, #1a1a2a, #16213e); height: 300px; display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 3rem; border: 1px solid var(--accent); box-shadow: var(--accent-glow);">
+                        <i class="fas fa-code"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="portfolio">
+        <极 class="container">
+            <h2 class="section-title">My Work</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Breezy</h3>
+                        <p>An IOT based temperature, humidity and AQI device which displays and suggest changes to improve and promote an healthier living spaces.</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        <i class="fas fa-mobile-alt"></极>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Terra</h3>
+                        <p>Developed embedded control systems for autonomous navigation, sensor fusion, and wireless telemetry in a UGV designed for search and rescue. Integrated GPS and IMU for real-time mapping and obstacle avoidance. </p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>SAE 2025</h3>
+                        <p>Designed and optimized the communication and work flow of the "Agena Pathfinder" drone which was presented at SAE 2025 at GATE university Bangalore. It was designed for automated Payload delivery and verification with terrane mapping inbuild to aid rescue workers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Email</h3>
+                            <p>bitsmith247@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Location</h3>
+                            <p>Chennai, Srmist</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Availability</h3>
+                            <p>Currently accepting new projects</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <div style="background: rgba(255, 255, 255, 0.02); padding: 2rem; border-radius: 8px; border: 1px solid rgba(160, 160, 255, 0.1);">
+                        <h3 style="margin-bottom: 1.5rem; color: var(--text-primary);">Send a Message</h3>
+                        <form>
+                            <div style="margin-bottom: 1rem;">
+                                <input type="text" placeholder="Your Name" style="width: 100%; padding: 0.8rem; background: rgba(160, 160, 255, 0.05); border: 1px solid rgba(160, 160, 255, 0.1); border-radius: 4px; color: var(--text-primary);">
+                            </div>
+                            <div style="margin-bottom: 1rem;">
+                                <input type="email" placeholder="Your Email" style="width: 100%; padding: 0.8rem; background: rgba(160, 160, 255, 0.05); border: 1px solid rgba(160, 160, 255, 0.1); border-radius: 4px; color: var(--text-primary);">
+                            </div>
+                            <div style="margin-bottom: 1rem;">
+                                <textarea placeholder="Your Message" rows="5" style="width: 100%; padding: 0.8rem; background: rgba(160, 160, 255, 0.05); border: 1px solid rgba(160, 160, 255, 0.1); border-radius: 4px; color: var(--text-primary); resize: vertical;"></textarea>
+                            </div>
+                            <button type="submit" style="width: 100%; padding: 0.8rem; background: transparent; border: 1px solid var(--accent); color: var(--text-primary); border-radius: 4px; cursor: pointer; transition: all 0.3s ease;">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-dribbble"></i></a>
+                <a href="#"><i class="fab fa-behance"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p>&copy; 2025 SV. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Simple glitch effect on the logo
+        const logo = document.querySelector('.logo');
+        
+        setInterval(() => {
+            if (Math.random() > 0.8) {
+                logo.style.textShadow = '0 0 10px var(--neon-blue)';
+                setTimeout(() => {
+                    logo.style.textShadow = 'none';
+                }, 100);
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
